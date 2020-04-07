@@ -1,7 +1,7 @@
 \documentclass[12pt]{paper}
 \usepackage[utf8]{inputenc} 
 \usepackage[T2A]{fontenc} 
-\usepackage[english, russian, autolang=english]{babel}
+\usepackage[russian, english]{babel}
 \usepackage{amsmath,amssymb}
 \usepackage{url}
 
@@ -18,7 +18,7 @@
 style=gost-authoryear,
 mergedate=maximum, %перемещает дату в начало
 movenames=false, % не перемещает имена авторов после /
-maxbibnames=4, % максимальное число авторов
+maxbibnames=2, % максимальное число авторов
 %firstinits=true,
 isbn=false,
 url=false,
@@ -26,12 +26,10 @@ url=false,
 %dashed = false,
 autolang=other,
 backend=biber%
-%natbib=true,
 ]{biblatex}
 
 
 %\let\emph\textit %убирает подчеркивание в библиографии
-
 
 %%% меняет поле language на langid
 \DeclareSourcemap{ %language-> langid
@@ -66,7 +64,6 @@ backend=biber%
 }
 }
 
- 
 
 %%%%%Настройки ГОСТА
 \renewcommand{\newblockpunct}{% убирает — 
