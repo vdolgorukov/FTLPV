@@ -15,10 +15,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage[
-style=gost-authoryear,
+style=gost-authoryear-min,
+%authoryear,
+%citestyle=authoryear,
+%bibstyle=gost-authoryear,
 mergedate=maximum, %перемещает дату в начало
 movenames=false, % не перемещает имена авторов после /
-maxbibnames=2, % максимальное число авторов
+maxbibnames=5, % максимальное число авторов
 %firstinits=true,
 isbn=false,
 url=false,
@@ -90,6 +93,17 @@ backend=biber%
 %\AtEveryBibitem{\clearfield{language}}
 \AtEveryBibitem{\clearfield{pagetotal}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+%%убирает скобки из [et al]
+%\newcommand*{\mkandothers}{\mkbibemph}
+\renewbibmacro*{name:andothers}{%
+  \ifboolexpr{
+    test {\ifnumequal{\value{listcount}}{\value{liststop}}}
+    and
+    test \ifmorenames
+  }
+    {\ifnumgreater{\value{liststop}}{1}
+       {\finalandcomma}
+       {}%
+     \andothersdelim\bibstring[\mkandothers]{andothers}}
+    {}}
