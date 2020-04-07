@@ -1,0 +1,98 @@
+\documentclass[12pt]{paper}
+\usepackage[utf8]{inputenc} 
+\usepackage[T2A]{fontenc} 
+\usepackage[english, russian, autolang=english]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+
+\title{Материалы семинара <<From the Logical Point of View>>}
+\subtitle{Краткие заметки посреди чумы}
+\date{логика посреди чумы}
+ 
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%
+%Настройки библиографии
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[
+style=gost-authoryear,
+mergedate=maximum, %перемещает дату в начало
+movenames=false, % не перемещает имена авторов после /
+maxbibnames=4, % максимальное число авторов
+%firstinits=true,
+isbn=false,
+url=false,
+%doi=false,
+%dashed = false,
+autolang=other,
+backend=biber%
+%natbib=true,
+]{biblatex}
+
+
+%\let\emph\textit %убирает подчеркивание в библиографии
+
+
+%%% меняет поле language на langid
+\DeclareSourcemap{ %language-> langid
+ \maps{
+    \map{
+     \step[fieldsource=language, fieldset=langid, origfieldval]
+     \step[fieldset=language, null]  }
+    \map{
+     \step[fieldsource=language, fieldset=keywords, origfieldval, final]
+     \step[fieldset=language, null]  }   
+     }}
+
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{
+      \step[fieldset=langid, fieldvalue={english}]
+    }
+  }
+}
+
+%%% Сначала русские источники, потом - иностранные
+\DeclareSourcemap{
+\maps[datatype=bibtex]{
+\map{
+\step[fieldsource=langid, match=russian, final]
+\step[fieldset=presort, fieldvalue={a}]
+}
+\map{
+\step[fieldsource=langid, notmatch=russian, final]
+\step[fieldset=presort, fieldvalue={z}]
+}
+}
+}
+
+ 
+
+%%%%%Настройки ГОСТА
+\renewcommand{\newblockpunct}{% убирает — 
+\addperiod\space\bibsentence}%block punct.,\bibsentence is for vol,etc.
+
+
+\DefineBibliographyStrings{english}{%
+  pages = {P\adddot},}
+\DefineBibliographyStrings{english}{%
+  number = {No\adddot},}
+\DefineBibliographyStrings{russian}{%
+  pages = {c\adddot},}  
+
+%убирает пробел перед : и ;
+\renewcommand*{\addcolondelim}{\addcolon\space}
+\renewcommand*{\addsemicolondelim}{\addsemicolon\space}
+
+%%Меняем [] на ()%%%%%%%%%%
+\renewcommand{\mkbibbrackets}[1]{\mkbibparens{#1}}
+
+%\AtEveryBibitem{\clearfield{month}}
+%\AtEveryBibitem{\clearfield{day}}
+%\AtEveryBibitem{\clearfield{file}}
+%\AtEveryBibitem{\clearfield{language}}
+\AtEveryBibitem{\clearfield{pagetotal}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
